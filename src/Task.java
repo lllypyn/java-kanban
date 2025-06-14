@@ -1,29 +1,30 @@
-import java.util.HashMap;
+import java.util.Objects;
 
 public class Task {
     String name;
-    Status status;
+    Status status = Status.NEW;
     String description;
-    boolean epic;
-    HashMap <String, SubTask> subTasksList;
-    boolean completed = false;
+    int id;
 
-    Task(String name, String description){
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || getClass() != object.getClass()) return false;
+        Task task = (Task) object;
+        return id == task.id && Objects.equals(name, task.name) && status == task.status && Objects.equals(description, task.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name);
+    }
+
+
+
+    Task(int id, String name, String description) {
         this.name = name;
         this.description = description;
+        this.id = id;
     }
-
-    public Task(String name, String description, HashMap<String, SubTask> subTasksList) {
-        this.name = name;
-        this.description = description;
-        this.subTasksList = subTasksList;
-    }
-    void addSubTask(String name, String description){
-        SubTask subTask = new SubTask(name,description);
-        subTasksList.put(name, subTask);
-    }
-
-
 
 
 

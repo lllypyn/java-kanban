@@ -1,13 +1,11 @@
-public class SubTask {
-    String name;
-    Status status;
-    String description;
-    boolean completed = false;
+public class SubTask extends Task{
+
+    int epicId;
 
 
-    SubTask(String name, String description) {
-        this.name = name;
-        this.description = description;
+    SubTask(int id, String name, String description, int epicId) {
+        super(id,name,description);
+        this.epicId = epicId;
     }
 
 
