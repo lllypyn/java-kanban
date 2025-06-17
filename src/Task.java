@@ -6,6 +6,12 @@ public class Task {
     String description;
     int id;
 
+    Task(int id, String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()) return false;
