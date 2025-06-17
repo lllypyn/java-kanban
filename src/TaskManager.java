@@ -1,6 +1,9 @@
 import java.util.HashMap;
 
 public class TaskManager {
+    HashMap<Integer, Task> tasksList = new HashMap<>();
+    HashMap<Integer, SubTask> subTasksList = new HashMap<>();
+    HashMap<Integer, EpicTask> epicTasksList = new HashMap<>();
     private int id = 0;
     HashMap <Integer, Object > tasksList = new HashMap<>();
 
