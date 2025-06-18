@@ -10,10 +10,9 @@ public class SubTask extends Task{
                 ", статус - " + status;
     }
 
-    SubTask(int id, String name, String description, int epicId) {
-        super(id,name,description);
+    SubTask(int id, String name, String description, int epicId, Status status) {
+        super(id,name,description,status);
         this.epicId = epicId;
+        this.status = status;
     }
-
-
 }

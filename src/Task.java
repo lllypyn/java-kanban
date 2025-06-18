@@ -2,11 +2,18 @@ import java.util.Objects;
 
 public class Task {
     String name;
-    Status status = Status.NEW;
+    Status status;
     String description;
     int id;
 
-    Task(int id, String name, String description) {
+    Task(int id, String name, String description, Status status) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+        this.status = status;
+    }
+
+    public Task(int id, String name, String description) {
         this.name = name;
         this.description = description;
         this.id = id;
@@ -24,14 +31,8 @@ public class Task {
         return Objects.hashCode(name);
     }
 
-
-
-    Task(int id, String name, String description) {
-        this.name = name;
-        this.description = description;
-        this.id = id;
+    @Override
+    public String toString() {
+        return "Задача " + id + ": " + name + " (" + description + ") " + "статус: " + status;
     }
-
-
-
 }

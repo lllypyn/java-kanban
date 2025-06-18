@@ -1,21 +1,25 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class EpicTask extends Task {
-    HashMap<String, SubTask> subTasksList;
+    ArrayList<SubTask> subIdList = new ArrayList<>();
+    Status status = setStatus();
 
-    private Status setStatus() {
+     Status setStatus() {
         int newCounter = 0;
         int doneCounter = 0;
+        int inProgressCounter = 0;
         for (SubTask subTask : subIdList){
-            if(subTask.status == Status.DONE){
+            if(Status.DONE.equals(subTask.status)){
                 doneCounter += 1;
+            }else if (subTask.status.equals(Status.IN_PROGRESS)){
+                inProgressCounter += 1;
             } else {
-                newCounter += 1;
+                newCounter +=1;
             }
         }
-        if (doneCounter > 0 && newCounter == 0)
+        if (doneCounter > 0 && newCounter == 0 && inProgressCounter == 0)
             status = Status.DONE;
-        else if (doneCounter > 0 && newCounter > 0)
+        else if (inProgressCounter > 0)
             status = Status.IN_PROGRESS;
         else status = Status.NEW;
         return status;
@@ -29,14 +33,8 @@ public class EpicTask extends Task {
 
     EpicTask(int id, String name, String description) {
         super(id, name, description);
-        this.subTasksList = subTasksList;
         this.id = id;
 
+
     }
-
-    int getId() {
-        return id;
-    }
-
-
 }
