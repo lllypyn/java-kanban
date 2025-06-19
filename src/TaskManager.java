@@ -84,4 +84,25 @@ public class TaskManager {
         tasksList.clear();
         subTasksList.clear();
     }
+    void setEpicStatus(EpicTask epicTask) {
+        int newCounter = 0;
+        int doneCounter = 0;
+        int inProgressCounter = 0;
+        for (SubTask subTask : epicTask.subIdList){
+            if(Status.DONE.equals(subTask.status)){
+                doneCounter += 1;
+            }else if (subTask.status.equals(Status.IN_PROGRESS)){
+                inProgressCounter += 1;
+            } else {
+                newCounter +=1;
+            }
+        }
+        if (doneCounter > 0 && newCounter == 0 && inProgressCounter == 0)
+            epicTask.status = Status.DONE;
+        else if (inProgressCounter > 0)
+            epicTask.status = Status.IN_PROGRESS;
+        else epicTask.status = Status.NEW;
+
+    }
+
 }
