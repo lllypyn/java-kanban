@@ -47,22 +47,49 @@ public class TaskManager {
         }
     }
 
-    void updateTask(int id, String newName, String newDescription) {
-        if (searchById(id).getClass().equals(EpicTask.class) && searchById(id) != null) {
-            EpicTask epicTask = (EpicTask) searchById(id);
-            epicTask.name = newName;
-            epicTask.description = newDescription;
-            epicTasksList.put(id, epicTask);
-        } else if (searchById(id).getClass().equals(Task.class) && searchById(id) != null) {
-            Task task = (Task) searchById(id);
-            task.name = newName;
-            task.description = newDescription;
-            tasksList.put(id, task);
-        } else if (searchById(id).getClass().equals(SubTask.class) && searchById(id) != null) {
-            SubTask subTask = (SubTask) searchById(id);
-            subTask.name = newName;
-            subTask.description = newDescription;
-            subTasksList.put(id, subTask);
+    EpicTask searchByIdInEpicTasks(int searchId) {
+        EpicTask epicTask = null;
+        if (epicTasksList.containsKey(searchId)) {
+            epicTask = epicTasksList.get(searchId);
+        }
+        return epicTask;
+    }
+
+    SubTask searchByIdInSubTasks(int searchId) {
+        SubTask subTask = null;
+        if (subTasksList.containsKey(searchId)) {
+            subTask = subTasksList.get(searchId);
+        }
+        return subTask;
+    }
+
+    void updateTask(Task task, String name,String description, Status status) {
+        if (task != null) {
+            Task updateTask = new Task(task.id, name, description, status);
+            tasksList.put(task.id, updateTask);
+        }
+    }
+
+    void updateEpicTask(EpicTask epicTask, String name,String description) {
+        if (epicTask != null) {
+            EpicTask updateEpicTask = new EpicTask(epicTask.id, name, description);
+            epicTasksList.put(epicTask.id, updateEpicTask);
+        }
+    }
+
+    void updateSubTask(SubTask subTask, String name,String description, Status status) {
+        if (subTask != null) {
+            SubTask updateSubTask = new SubTask(subTask.id, name, description,subTask.epicId, status);
+            subTasksList.put(subTask.id, updateSubTask);
+        }
+    }
+
+    void deleteEpicTask(int id){
+        if (epicTasksList.containsKey(id)){
+            deleteAllSubTasksInEpic(id);
+            epicTasksList.remove(id);
+        } else {
+            System.out.println("Такой задачи не найдено");
         }
     }
 
