@@ -19,6 +19,7 @@ public class Task {
         this.id = id;
     }
 
+
     @Override
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()) return false;
