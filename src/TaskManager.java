@@ -166,6 +166,11 @@ public class TaskManager {
         tasksList.clear();
     }
 
+    void deleteAllEpicTasks(){
+        epicTasksList.clear();
+        subTasksList.clear();
+    }
+
     void setEpicStatus(EpicTask epicTask) {
         int newCounter = 0;
         int doneCounter = 0;
