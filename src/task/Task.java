@@ -1,12 +1,14 @@
+package task;
+
 import java.util.Objects;
 
 public class Task {
     String name;
-    Status status;
+    public Status status;
     String description;
-    int id;
+    public int id;
 
-    Task(int id, String name, String description, Status status) {
+    public Task(int id, String name, String description, Status status) {
         this.name = name;
         this.description = description;
         this.id = id;
