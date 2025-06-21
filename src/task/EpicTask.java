@@ -3,11 +3,18 @@ package task;
 import java.util.ArrayList;
 
 public class EpicTask extends Task {
-    public ArrayList<SubTask> subIdList = new ArrayList<>();
+    private final ArrayList<Integer> subIdList;
 
     public EpicTask(int id, String name, String description) {
+
         super(id, name, description);
+        subIdList = new ArrayList<>();
     }
+
+    public ArrayList<Integer> getSubIdList() {
+        return subIdList;
+    }
+
 
     @Override
     public String toString() {
