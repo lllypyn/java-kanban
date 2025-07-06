@@ -23,7 +23,7 @@ class ManagersTest {
 
   @Test
   void checkListHistoryIsEmpty() {
-    assertNull(manager.inMemoryHistoryManager.getHistory(), "размер списка историй не совпадает с ожидаемым 0");
+    assertNull(manager.history.getHistory(), "размер списка историй не совпадает с ожидаемым 0");
   }
 
   @Test
