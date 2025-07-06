@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 
 public class InMemoryTaskManager implements TaskManager {
-    public HashMap<Integer, Task> tasksList = new HashMap<>();
+    public HashMap<Integer, ? extends Task> tasksList = new HashMap<>();
     public HashMap<Integer, SubTask> subTasksList = new HashMap<>();
     public HashMap<Integer, EpicTask> epicTasksList = new HashMap<>();
     InMemoryHistoryManager history = new InMemoryHistoryManager();
