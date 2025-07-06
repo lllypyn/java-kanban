@@ -14,7 +14,9 @@ public class EpicTask extends Task {
     public ArrayList<Integer> getSubIdList() {
         return subIdList;
     }
-
+    public void setSubIdList(int id){
+        subIdList.add(id);
+    }
 
     @Override
     public String toString() {

@@ -11,7 +11,7 @@ public class InMemoryTaskManager implements TaskManager {
     public HashMap<Integer, Task> tasksList = new HashMap<>();
     public HashMap<Integer, SubTask> subTasksList = new HashMap<>();
     public HashMap<Integer, EpicTask> epicTasksList = new HashMap<>();
-    InMemoryHistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
+    InMemoryHistoryManager history = new InMemoryHistoryManager();
 
     public int id = 0;
 
@@ -19,23 +19,21 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void addTask(Task task) {
-        tasksList.put(id, task);
-
+        tasksList.put(task.getId(), task);
         id += 1;
     }
 
     @Override
     public void addEpicTask(EpicTask epicTask) {
         setEpicStatus(epicTask);
-        epicTasksList.put(id, epicTask);
-
+        epicTasksList.put(epicTask.getId(), epicTask);
         id += 1;
     }
 
     @Override
     public void addSubTask(SubTask subTask) {
-        epicTasksList.get(subTask.getEpicId()).getSubIdList().add(subTask.getId());
-        subTasksList.put(id, subTask);
+        epicTasksList.get(subTask.getEpicId()).setSubIdList(subTask.getId());
+        subTasksList.put(subTask.getId(), subTask);
         setEpicStatus(epicTasksList.get(subTask.getEpicId()));
         id += 1;
     }
@@ -53,13 +51,13 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Object searchById(int searchId) {
         if (searchByIdInTasks(searchId) != null) {
-            inMemoryHistoryManager.add(tasksList.get(searchId));
+            history.add(tasksList.get(searchId));
             return searchByIdInTasks(searchId);
         } else if (searchByIdInEpicTasks(searchId) != null) {
-            inMemoryHistoryManager.add(epicTasksList.get(searchId));
+            history.add(epicTasksList.get(searchId));
             return searchByIdInEpicTasks(searchId);
         } else if (searchByIdInSubTasks(searchId) != null) {
-            inMemoryHistoryManager.add(subTasksList.get(searchId));
+            history.add(subTasksList.get(searchId));
             return searchByIdInSubTasks(searchId);
         } else {
             System.out.println("Такой задачи не найдено");
@@ -72,7 +70,6 @@ public class InMemoryTaskManager implements TaskManager {
         Task task = null;
         if (tasksList.containsKey(searchId)) {
             task = tasksList.get(searchId);
-
         }
         return task;
     }
@@ -82,7 +79,6 @@ public class InMemoryTaskManager implements TaskManager {
         EpicTask epicTask = null;
         if (epicTasksList.containsKey(searchId)) {
             epicTask = epicTasksList.get(searchId);
-
         }
         return epicTask;
     }
@@ -92,8 +88,6 @@ public class InMemoryTaskManager implements TaskManager {
         SubTask subTask = null;
         if (subTasksList.containsKey(searchId)) {
             subTask = subTasksList.get(searchId);
-
-
         }
         return subTask;
     }
@@ -109,7 +103,6 @@ public class InMemoryTaskManager implements TaskManager {
     public void updateEpicTask(EpicTask epicTask) {
         if (epicTask != null) {
             epicTasksList.put(epicTask.getId(), epicTask);
-
         }
     }
 
@@ -216,8 +209,4 @@ public class InMemoryTaskManager implements TaskManager {
             epicTask.setStatus(Status.IN_PROGRESS);
         else epicTask.setStatus(Status.NEW);
     }
-
-
-
-
 }

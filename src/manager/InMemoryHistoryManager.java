@@ -8,19 +8,14 @@ import java.util.List;
 public class InMemoryHistoryManager implements HistoryManager {
 
     public static List<Task> history = new ArrayList<>(10);
-    InMemoryHistoryManager(){
-
-    }
-
 
     @Override
     public List<Task> getHistory() {
-        if (history.isEmpty()){
+        if (history.isEmpty()) {
             return null;
         } else {
             return history;
         }
-
     }
 
     @Override
@@ -29,11 +24,10 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     @Override
-    public void add (Task task){
-        if (history.size()==10 && task != null){
+    public void add(Task task) {
+        if (history.size() == 10 && task != null) {
             history.removeFirst();
         }
         history.add(task);
-
     }
 }

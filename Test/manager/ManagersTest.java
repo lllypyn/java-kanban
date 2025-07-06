@@ -43,6 +43,7 @@ class ManagersTest {
     assertEquals(manager.history.getHistory().getLast(), manager.searchById(2));
     assertEquals(manager.history.getHistory().getFirst(), manager.searchById(1));
   }
+
   @Test
   void checkSearchingWithLists() {
     EpicTask epicTask = new EpicTask(100, "название", "пояснение");
@@ -52,5 +53,18 @@ class ManagersTest {
     System.out.println(manager.searchById(100));
     assertEquals(epicTask,manager.searchById(100), "поиск по айди в списке эпиктасков не работает");
     assertEquals(subTask,manager.searchById(200),"поиск по айди в списке сабтасков не работает");
+  }
+  @Test
+  void checkSaveHistoryByOneId(){ // проверка на сохранение разных версий одной и той же задачи
+    manager.searchById(1);
+    manager.searchById(2);
+    manager.updateEpicTask(new EpicTask(1,"NewEpicTask","NewDescription"));
+    manager.searchById(1);
+    assertNotEquals(manager.history.getHistory().getFirst().getName(),manager.history.getHistory().getLast().getName(),"Версии задач одинаковые");
+  }
+
+  @Test
+  void testManager(){
+    assertEquals(manager.getClass(),Managers.getDefault().getClass(),"менеджер вызывает неверный объект");
   }
 }
