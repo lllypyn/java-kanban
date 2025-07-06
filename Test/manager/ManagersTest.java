@@ -30,7 +30,7 @@ class ManagersTest {
   void checkForHistoryChanges() {
     manager.searchById(4);
     manager.searchById(0);
-    assertEquals(2, manager.inMemoryHistoryManager.getHistory().size(), "История просмотров задач не изменяется");
+    assertEquals(2, manager.history.getHistory().size(), "История просмотров задач не изменяется");
   }
 
   @Test
