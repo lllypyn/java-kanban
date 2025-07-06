@@ -40,11 +40,17 @@ class ManagersTest {
       manager.searchById(1);
     }
     manager.searchById(2);
-    assertEquals(manager.inMemoryHistoryManager.getHistory().getLast(), manager.searchById(2));
-    assertEquals(manager.inMemoryHistoryManager.getHistory().getFirst(), manager.searchById(1));
+    assertEquals(manager.history.getHistory().getLast(), manager.searchById(2));
+    assertEquals(manager.history.getHistory().getFirst(), manager.searchById(1));
   }
   @Test
-  void checkHistoryWhenSearching() {
-
+  void checkSearchingWithLists() {
+    EpicTask epicTask = new EpicTask(100, "название", "пояснение");
+    manager.addEpicTask(epicTask);
+    SubTask subTask = new SubTask(200, "name", "description", 100, Status.DONE);
+    manager.addSubTask(subTask);
+    System.out.println(manager.searchById(100));
+    assertEquals(epicTask,manager.searchById(100), "поиск по айди в списке эпиктасков не работает");
+    assertEquals(subTask,manager.searchById(200),"поиск по айди в списке сабтасков не работает"));
   }
 }
