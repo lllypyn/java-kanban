@@ -51,6 +51,6 @@ class ManagersTest {
     manager.addSubTask(subTask);
     System.out.println(manager.searchById(100));
     assertEquals(epicTask,manager.searchById(100), "поиск по айди в списке эпиктасков не работает");
-    assertEquals(subTask,manager.searchById(200),"поиск по айди в списке сабтасков не работает"));
+    assertEquals(subTask,manager.searchById(200),"поиск по айди в списке сабтасков не работает");
   }
 }
