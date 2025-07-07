@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 
 public class InMemoryTaskManager implements TaskManager {
-    public HashMap<Integer, ? extends Task> tasksList = new HashMap<>();
+    public HashMap<Integer, Task> tasksList = new HashMap<>();
     public HashMap<Integer, SubTask> subTasksList = new HashMap<>();
     public HashMap<Integer, EpicTask> epicTasksList = new HashMap<>();
     InMemoryHistoryManager history = new InMemoryHistoryManager();
@@ -18,16 +18,7 @@ public class InMemoryTaskManager implements TaskManager {
 
 
     @Override
-    public  void addTask(Task task) {
-        if (task instanceof SubTask){
-            int epicId = ((SubTask)task).getEpicId();
-            if (tasksList.get(epicId) instanceof EpicTask){
-                ((EpicTask) tasksList.get(epicId)).setSubIdList((SubTask)task);
-                setEpicStatus((EpicTask) tasksList.get(epicId));
-            }
-        }else if (task instanceof EpicTask){
-            setEpicStatus((EpicTask)task);
-        }
+    public void addTask(Task task) {
         tasksList.put(task.getId(), task);
         id += 1;
     }
