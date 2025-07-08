@@ -14,7 +14,8 @@ public class EpicTask extends Task {
     public ArrayList<Integer> getSubIdList() {
         return subIdList;
     }
-    public void setSubIdList(int id){
+
+    public void setSubIdList(int id) {
         subIdList.add(id);
     }
 
@@ -23,5 +24,4 @@ public class EpicTask extends Task {
         return "Глобальная задача - " + id + " " + name + " (" + description + "). Статус - " + status +
                 ".\n Список подзадач:\n" + subIdList;
     }
-
 }

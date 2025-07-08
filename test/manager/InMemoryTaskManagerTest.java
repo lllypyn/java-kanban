@@ -1,13 +1,10 @@
 package manager;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 import task.EpicTask;
 import task.Status;
 import task.SubTask;
 import task.Task;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,21 +26,17 @@ class InMemoryTaskManagerTest {
         assertEquals(subTask, subTask2, "Субтаски с одинаковыми айди не равны");
         assertEquals(epicTask, epicTask2, "Эпиктаски с одинаковыми айди не равны");
     }
+
     @Test
     void testOfAddGenerationAndEntered(){
-        Managers.manager.addTask(new Task(Managers.manager.id, "autoname0","description",Status.DONE));
-        Managers.manager.addTask(new Task(Managers.manager.id,"autoname1","description",Status.DONE));
-        Managers.manager.addTask(new Task(Managers.manager.id,"autoname2","description",Status.DONE));
-        System.out.println(Managers.manager.id);
-        Managers.manager.addTask(new Task(2,"name","description",Status.DONE));
-        System.out.println(Managers.manager.id);
-        Managers.manager.addTask(new Task(Managers.manager.id, "autoname with entered","description",Status.DONE));
-        System.out.println(Managers.manager.id);
-        System.out.println(Managers.manager.tasksList);
-
-
+        InMemoryTaskManager manager = Managers.getDefault();
+        manager.addTask(new Task(manager.id,"autoname1","description",Status.DONE));
+        manager.addTask(new Task(manager.id,"autoname2","description",Status.DONE));
+        System.out.println(manager.id);
+        manager.addTask(new Task(2,"name","description",Status.DONE));
+        System.out.println(manager.id);
+        manager.addTask(new Task(manager.id, "autoname with entered","description",Status.DONE));
+        System.out.println(manager.id);
+        System.out.println(manager.tasksList);
     }
-
-
-
 }

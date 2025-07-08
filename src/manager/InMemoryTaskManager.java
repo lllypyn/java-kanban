@@ -4,18 +4,20 @@ import task.EpicTask;
 import task.Status;
 import task.SubTask;
 import task.Task;
+
 import java.util.HashMap;
 
-
 public class InMemoryTaskManager implements TaskManager {
-    public HashMap<Integer, Task> tasksList = new HashMap<>();
-    public HashMap<Integer, SubTask> subTasksList = new HashMap<>();
-    public HashMap<Integer, EpicTask> epicTasksList = new HashMap<>();
-    InMemoryHistoryManager history = new InMemoryHistoryManager();
+    public final HashMap<Integer, Task> tasksList = new HashMap<>();
+    public final HashMap<Integer, SubTask> subTasksList = new HashMap<>();
+    public final HashMap<Integer, EpicTask> epicTasksList = new HashMap<>();
 
     public int id = 0;
 
-
+    @Override
+    public HistoryManager getHistory() {
+        return Managers.getDefaultHistory();
+    }
 
     @Override
     public void addTask(Task task) {
@@ -48,16 +50,16 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    @Override
+    @Override //  если не критично пока оставлю, переделаю чуть позже
     public Object searchById(int searchId) {
         if (searchByIdInTasks(searchId) != null) {
-            history.add(tasksList.get(searchId));
+            getHistory().add(tasksList.get(searchId));
             return searchByIdInTasks(searchId);
         } else if (searchByIdInEpicTasks(searchId) != null) {
-            history.add(epicTasksList.get(searchId));
+            getHistory().add(epicTasksList.get(searchId));
             return searchByIdInEpicTasks(searchId);
         } else if (searchByIdInSubTasks(searchId) != null) {
-            history.add(subTasksList.get(searchId));
+            getHistory().add(subTasksList.get(searchId));
             return searchByIdInSubTasks(searchId);
         } else {
             System.out.println("Такой задачи не найдено");
@@ -137,7 +139,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteSubTask(int id) {
         if (subTasksList.containsKey(id)) {
-            epicTasksList.get(subTasksList.get(id).getEpicId()).getSubIdList().remove((Integer)id);
+            epicTasksList.get(subTasksList.get(id).getEpicId()).getSubIdList().remove((Integer) id);
 
             setEpicStatus(epicTasksList.get(subTasksList.get(id).getEpicId()));
             subTasksList.remove(id);
@@ -203,10 +205,8 @@ public class InMemoryTaskManager implements TaskManager {
                 newCounter += 1;
             }
         }
-        if (doneCounter > 0 && newCounter == 0 && inProgressCounter == 0)
-            epicTask.setStatus(Status.DONE);
-        else if (inProgressCounter > 0)
-            epicTask.setStatus(Status.IN_PROGRESS);
+        if (doneCounter > 0 && newCounter == 0 && inProgressCounter == 0) epicTask.setStatus(Status.DONE);
+        else if (inProgressCounter > 0) epicTask.setStatus(Status.IN_PROGRESS);
         else epicTask.setStatus(Status.NEW);
     }
 }

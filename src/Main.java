@@ -1,26 +1,23 @@
 import manager.InMemoryTaskManager;
+import manager.Managers;
 import task.EpicTask;
 import task.Status;
 import task.SubTask;
 import task.Task;
 
-public class Main{
+public class Main {
 
     public static void main(String[] args) {
-        InMemoryTaskManager manager = new InMemoryTaskManager();
+        InMemoryTaskManager manager = Managers.getDefault();
 
-        //## Tests
-        //# добавление
-
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             System.out.println("добавляем глобальную задачу " + manager.id);
             manager.addEpicTask(new EpicTask(manager.id, "Гл.задача", "Гл.пояснение"));
-            for (int j = 0; j < 9; j++){
-                manager.addSubTask(new SubTask(manager.id, "подзадача", "подз.пояснение",
-                        (i * 10), Status.DONE));
+            for (int j = 0; j < 9; j++) {
+                manager.addSubTask(new SubTask(manager.id, "подзадача", "подз.пояснение", (i * 10), Status.DONE));
             }
         }
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             System.out.println("добавляем обычную задачу" + manager.id);
             manager.addTask(new Task(manager.id, "об.задача", "об.пояснение", Status.NEW));
         }

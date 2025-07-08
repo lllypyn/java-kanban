@@ -16,8 +16,6 @@ public class SubTask extends Task {
     @Override
     public String toString() {
 
-        return "\n  Подзадача " + id + " " + name + " (" + description + ") " + "относится к глобальной задаче " +
-                epicId + ", статус - " + status;
+        return "\n  Подзадача " + id + " " + name + " (" + description + ") " + "относится к глобальной задаче " + epicId + ", статус - " + status;
     }
-
 }

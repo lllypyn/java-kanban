@@ -4,7 +4,6 @@ import task.EpicTask;
 import task.SubTask;
 import task.Task;
 
-
 public interface TaskManager {
     void addTask(Task task);
 
@@ -45,5 +44,7 @@ public interface TaskManager {
     void deleteAllEpicTasks();
 
     void setEpicStatus(EpicTask epicTask);
+
+    HistoryManager getHistory();
 
 }

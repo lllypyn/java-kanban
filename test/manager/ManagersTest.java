@@ -23,14 +23,15 @@ class ManagersTest {
 
   @Test
   void checkListHistoryIsEmpty() {
-    assertNull(manager.history.getHistory(), "размер списка историй не совпадает с ожидаемым 0");
+    assertNull(manager.getHistory().getHistory(), "размер списка историй не совпадает с ожидаемым 0");
   }
 
   @Test
   void checkForHistoryChanges() {
+    manager.getHistory().getHistory().clear();
     manager.searchById(4);
     manager.searchById(0);
-    assertEquals(2, manager.history.getHistory().size(), "История просмотров задач не изменяется");
+    assertEquals(2, manager.getHistory().getHistory().size(), "История просмотров задач не изменяется");
   }
 
   @Test
@@ -40,8 +41,8 @@ class ManagersTest {
       manager.searchById(1);
     }
     manager.searchById(2);
-    assertEquals(manager.history.getHistory().getLast(), manager.searchById(2));
-    assertEquals(manager.history.getHistory().getFirst(), manager.searchById(1));
+    assertEquals(manager.getHistory().getHistory().getLast(), manager.searchById(2));
+    assertEquals(manager.getHistory().getHistory().getFirst(), manager.searchById(1));
   }
 
   @Test
@@ -60,7 +61,7 @@ class ManagersTest {
     manager.searchById(2);
     manager.updateEpicTask(new EpicTask(1,"NewEpicTask","NewDescription"));
     manager.searchById(1);
-    assertNotEquals(manager.history.getHistory().getFirst().getName(),manager.history.getHistory().getLast().getName(),"Версии задач одинаковые");
+    assertNotEquals(manager.getHistory().getHistory().getFirst().getName(),manager.getHistory().getHistory().getLast().getName(),"Версии задач одинаковые");
   }
 
   @Test
