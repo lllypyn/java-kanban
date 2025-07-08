@@ -1,14 +1,13 @@
 package manager;
 
-import task.EpicTask;
+import task.Epic;
 import task.SubTask;
 import task.Task;
-
 
 public interface TaskManager {
     void addTask(Task task);
 
-    void addEpicTask(EpicTask epicTask);
+    void addEpicTask(Epic epic);
 
     void addSubTask(SubTask subTask);
 
@@ -18,13 +17,13 @@ public interface TaskManager {
 
     Task searchByIdInTasks(int searchId);
 
-    EpicTask searchByIdInEpicTasks(int searchId);
+    Epic searchByIdInEpicTasks(int searchId);
 
     SubTask searchByIdInSubTasks(int searchId);
 
     void updateTask(Task task);
 
-    void updateEpicTask(EpicTask epicTask);
+    void updateEpicTask(Epic epic);
 
     void updateSubTask(SubTask subTask);
 
@@ -44,6 +43,8 @@ public interface TaskManager {
 
     void deleteAllEpicTasks();
 
-    void setEpicStatus(EpicTask epicTask);
+    void setEpicStatus(Epic epic);
+
+    HistoryManager getHistory();
 
 }

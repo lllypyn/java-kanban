@@ -2,10 +2,10 @@ package task;
 
 import java.util.ArrayList;
 
-public class EpicTask extends Task {
+public class Epic extends Task {
     private final ArrayList<Integer> subIdList;
 
-    public EpicTask(int id, String name, String description) {
+    public Epic(int id, String name, String description) {
 
         super(id, name, description);
         subIdList = new ArrayList<>();
@@ -14,7 +14,8 @@ public class EpicTask extends Task {
     public ArrayList<Integer> getSubIdList() {
         return subIdList;
     }
-    public void setSubIdList(int id){
+
+    public void setSubIdList(int id) {
         subIdList.add(id);
     }
 
@@ -23,5 +24,4 @@ public class EpicTask extends Task {
         return "Глобальная задача - " + id + " " + name + " (" + description + "). Статус - " + status +
                 ".\n Список подзадач:\n" + subIdList;
     }
-
 }

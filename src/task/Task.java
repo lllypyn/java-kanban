@@ -32,6 +32,7 @@ public class Task {
     public int getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
@@ -47,7 +48,6 @@ public class Task {
     public String toString() {
         return "Задача " + id + ": " + name + " (" + description + ") " + "статус: " + status;
     }
-
 
     @Override
     public int hashCode() {
