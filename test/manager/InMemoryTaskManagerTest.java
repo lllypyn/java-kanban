@@ -29,14 +29,14 @@ class InMemoryTaskManagerTest {
 
     @Test
     void testOfAddGenerationAndEntered(){
-        InMemoryTaskManager manager = Managers.getDefault();
-        manager.addTask(new Task(manager.id,"autoname1","description",Status.DONE));
-        manager.addTask(new Task(manager.id,"autoname2","description",Status.DONE));
-        System.out.println(manager.id);
+        TaskManager manager = Managers.getDefault();
+        manager.addTask(new Task(manager.getId(),"autoname1","description",Status.DONE));
+        manager.addTask(new Task(manager.getId(),"autoname2","description",Status.DONE));
+        System.out.println(manager.getId());
         manager.addTask(new Task(2,"name","description",Status.DONE));
-        System.out.println(manager.id);
-        manager.addTask(new Task(manager.id, "autoname with entered","description",Status.DONE));
-        System.out.println(manager.id);
-        System.out.println(manager.tasksList);
+        System.out.println(manager.getId());
+        manager.addTask(new Task(manager.getId(), "autoname with entered","description",Status.DONE));
+        System.out.println(manager.getId());
+
     }
 }
