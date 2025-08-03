@@ -14,8 +14,13 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     public static List<Task> history;
 
-    InMemoryHistoryManager(){
-    history = new ArrayList<>(10);
+
+    @Override
+    public void remove(int id){  // удаляем по айди
+        if(historyMap.containsKey(id)){ // проверяем есть ли в мапе
+            removeNode(historyMap.get(id)); // удаляем ноду
+            historyMap.remove(id);  // удаляем ноду из мапы
+        }
     }
 
     @Override
