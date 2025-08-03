@@ -1,7 +1,7 @@
 package manager;
 
 public class Node<T> {
-    public Task data;
+    public T data;
     public Node<T> next;
     public Node<T> prev;
 
