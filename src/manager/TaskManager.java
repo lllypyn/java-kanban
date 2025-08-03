@@ -49,4 +49,5 @@ public interface TaskManager {
 
     int getId();
 
+    void clearHistory();
 }
