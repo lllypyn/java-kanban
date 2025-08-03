@@ -6,7 +6,7 @@ import task.Status;
 import task.SubTask;
 import task.Task;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryTaskManagerTest {
 
@@ -28,15 +28,14 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void testOfAddGenerationAndEntered(){
+    void testOfAddGenerationAndEntered() {
         TaskManager manager = Managers.getDefault();
-        manager.addTask(new Task(manager.getId(),"autoname1","description",Status.DONE));
-        manager.addTask(new Task(manager.getId(),"autoname2","description",Status.DONE));
+        manager.addTask(new Task(manager.getId(), "autoname1", "description", Status.DONE));
+        manager.addTask(new Task(manager.getId(), "autoname2", "description", Status.DONE));
         System.out.println(manager.getId());
-        manager.addTask(new Task(2,"name","description",Status.DONE));
+        manager.addTask(new Task(2, "name", "description", Status.DONE));
         System.out.println(manager.getId());
-        manager.addTask(new Task(manager.getId(), "autoname with entered","description",Status.DONE));
+        manager.addTask(new Task(manager.getId(), "autoname with entered", "description", Status.DONE));
         System.out.println(manager.getId());
-
     }
 }
